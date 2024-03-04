@@ -55,16 +55,21 @@ class Dado implements Runnable {
             int l_NumGenerado = (int) (Math.random() * 6) + 1;      // Generar número aleatorio del dado.
 
             // Comprobar qué dado está tirando.
-            if (a_Nombre.equals(DADO1)) {
+            if (a_Nombre.equals(DADO1) && !a_Buzon.a_DadoTirado.equals(DADO1)) {
+
                 a_Buzon.a_NumDado1 = l_NumGenerado;     // Almacenar el número en el buzón.
 
-            } else if (a_Nombre.equals(DADO2)) {
+                System.out.println("A: " + a_Buzon.a_NumDado1);     // Imprimir el número del dado 1.
+
+                a_Buzon.a_DadoTirado = DADO1;       // Establecer el dado que se ha tirado.
+
+            } else if (a_Nombre.equals(DADO2) && !a_Buzon.a_DadoTirado.equals(DADO2)) {
 
                 a_Buzon.a_NumDado2 = l_NumGenerado;     // Almacenar el número en el buzón.
 
-                // Imprimir los números de ambos dados.
-                System.out.println("A: " + a_Buzon.a_NumDado1);
-                System.out.println("B: " + a_Buzon.a_NumDado2);
+                System.out.println("B: " + a_Buzon.a_NumDado2);     // Imprimir el número del dado 2.
+
+                a_Buzon.a_DadoTirado = DADO2;       // Establecer el dado que se ha tirado.
 
                 a_Buzon.a_NumRondas++;                                      // Aumentar el número de rondas tiradas.
                 System.out.println("R: " + a_Buzon.a_NumRondas + "\n");     // Imprimir el número de ronda.
@@ -89,4 +94,5 @@ class Buzon {
     public int a_NumRondas = 0;
     public boolean a_Coincidencia = false;
     public Semaphore l_Semaforo = new Semaphore(1);
+    public String a_DadoTirado = "Dado 2";
 }
